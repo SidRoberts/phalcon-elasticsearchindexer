@@ -73,3 +73,5 @@ $di->set(
 ```
 
 That's it! Whenever a Model is saved (created/updated) or deleted, it will be reflected in Elasticsearch at the same time.
+
+Currently, this library only supports models with a single field primary key.
