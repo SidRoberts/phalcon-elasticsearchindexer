@@ -4,17 +4,28 @@ namespace Sid\Phalcon\ElasticsearchIndexer;
 
 class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface
 {
+    /**
+     * @var \Phalcon\Events\ManagerInterface
+     */
     protected $eventsManager;
 
+    /**
+     * @var string
+     */
     protected $index;
 
 
 
+    /**
+     * @param string $index
+     *
+     * @throws Exception
+     */
     public function __construct($index)
     {
         $di = $this->getDI();
         if (!($di instanceof \Phalcon\DiInterface)) {
-            throw new \Sid\Phalcon\ElasticsearchIndexer\Exception("A dependency injection object is required to access internal services");
+            throw new Exception("A dependency injection object is required to access internal services");
         }
 
         $this->index = $index;
@@ -22,11 +33,17 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
 
+    /**
+     * @return \Phalcon\Events\ManagerInterface
+     */
     public function getEventsManager()
     {
         return $this->eventsManager;
     }
 
+    /**
+     * @param \Phalcon\Events\ManagerInterface $eventsManager
+     */
     public function setEventsManager(\Phalcon\Events\ManagerInterface $eventsManager)
     {
         $this->eventsManager = $eventsManager;
@@ -34,6 +51,11 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
 
+    /**
+     * @param \Phalcon\Mvc\ModelInterface $model
+     *
+     * @throws Exception
+     */
     public function index(\Phalcon\Mvc\ModelInterface $model)
     {
         $eventsManager = $this->getEventsManager();
@@ -60,6 +82,11 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
 
+    /**
+     * @param \Phalcon\Mvc\ModelInterface $model
+     *
+     * @throws Exception
+     */
     public function delete(\Phalcon\Mvc\ModelInterface $model)
     {
         $eventsManager = $this->getEventsManager();
@@ -85,6 +112,11 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
 
+    /**
+     * @param \Phalcon\Mvc\ModelInterface $model
+     *
+     * @throws Exception
+     */
     protected function getPrimaryKeyValue(\Phalcon\Mvc\ModelInterface $model)
     {
         $primaryKeyAttributes = $this->modelsMetadata->getPrimaryKeyAttributes($model);
