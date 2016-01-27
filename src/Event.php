@@ -4,16 +4,16 @@ namespace Sid\Phalcon\ElasticsearchIndexer;
 
 class Event extends \Phalcon\Mvc\User\Plugin
 {
-    protected $onlyIndexModelsWithInterface;
+    protected $indexAllModels;
     
     
     
     /**
-     * @param boolean $onlyIndexModelsWithInterface
+     * @param boolean $indexAllModels
      */
-    public function __construct($onlyIndexModelsWithInterface = false)
+    public function __construct($indexAllModels = true)
     {
-        $this->onlyIndexModelsWithInterface = $onlyIndexModelsWithInterface;
+        $this->indexAllModels = $indexAllModels;
     }
     
     
@@ -49,6 +49,6 @@ class Event extends \Phalcon\Mvc\User\Plugin
      */
     protected function canModelBeIndexed(\Phalcon\Mvc\ModelInterface $model)
     {
-        return (($model instanceof \Sid\Phalcon\ElasticsearchIndexer\IndexInterface) || !$this->onlyIndexModelsWithInterface);
+        return ($this->indexAllModels || ($model instanceof \Sid\Phalcon\ElasticsearchIndexer\IndexInterface));
     }
 }

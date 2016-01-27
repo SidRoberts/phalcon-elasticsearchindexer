@@ -27,10 +27,11 @@ $di->set(
 
         $eventsManager = $di->getShared("eventsManager");
 
-        // If this is true, only models that implement \Sid\Phalcon\ElasticsearchIndexer\IndexInterface will be indexed.
-        $onlyIndexModelsWithInterface = false;
+        // If this is false, only models that implement \Sid\Phalcon\ElasticsearchIndexer\IndexInterface will be indexed.
+        // By default, this is true.
+        $indexAllModels = true;
 
-        $eventsManager->attach("model", new \Sid\Phalcon\ElasticsearchIndexer\Event($onlyIndexModelsWithInterface));
+        $eventsManager->attach("model", new \Sid\Phalcon\ElasticsearchIndexer\Event($indexAllModels));
 
         $modelsManager->setEventsManager($eventsManager);
 
