@@ -9,7 +9,7 @@ Elasticsearch indexer component for Phalcon.
 
 Install using Composer:
 
-```
+```json
 {
     "require": {
         "sidroberts/phalcon-elasticsearchindexer": "dev-master"
