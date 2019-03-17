@@ -2,10 +2,16 @@
 
 namespace Sid\Phalcon\ElasticsearchIndexer;
 
-class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface
+use Phalcon\DiInterface;
+use Phalcon\Di\Injectable;
+use Phalcon\Events\EventsAwareInterface;
+use Phalcon\Events\ManagerInterface as EventsManagerInterface;
+use Phalcon\Mvc\ModelInterface;
+
+class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 {
     /**
-     * @var \Phalcon\Events\ManagerInterface
+     * @var EventsManagerInterface
      */
     protected $eventsManager;
 
@@ -24,7 +30,7 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
     public function __construct($index)
     {
         $di = $this->getDI();
-        if (!($di instanceof \Phalcon\DiInterface)) {
+        if (!($di instanceof DiInterface)) {
             throw new Exception("A dependency injection object is required to access internal services");
         }
 
@@ -34,7 +40,7 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
     /**
-     * @return \Phalcon\Events\ManagerInterface
+     * @return EventsManagerInterface
      */
     public function getEventsManager()
     {
@@ -42,9 +48,9 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
     }
 
     /**
-     * @param \Phalcon\Events\ManagerInterface $eventsManager
+     * @param EventsManagerInterface $eventsManager
      */
-    public function setEventsManager(\Phalcon\Events\ManagerInterface $eventsManager)
+    public function setEventsManager(EventsManagerInterface $eventsManager)
     {
         $this->eventsManager = $eventsManager;
     }
@@ -52,15 +58,15 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
     /**
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param ModelInterface $model
      *
      * @throws Exception
      */
-    public function index(\Phalcon\Mvc\ModelInterface $model)
+    public function index(ModelInterface $model)
     {
         $eventsManager = $this->getEventsManager();
 
-        if ($eventsManager instanceof \Phalcon\Events\ManagerInterface) {
+        if ($eventsManager instanceof EventsManagerInterface) {
             $eventsManager->fire("search:beforeIndex", $this);
         }
 
@@ -73,7 +79,7 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
             ]
         );
 
-        if ($eventsManager instanceof \Phalcon\Events\ManagerInterface) {
+        if ($eventsManager instanceof EventsManagerInterface) {
             $eventsManager->fire("search:afterIndex", $this);
         }
 
@@ -83,15 +89,15 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
     /**
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param ModelInterface $model
      *
      * @throws Exception
      */
-    public function delete(\Phalcon\Mvc\ModelInterface $model)
+    public function delete(ModelInterface $model)
     {
         $eventsManager = $this->getEventsManager();
 
-        if ($eventsManager instanceof \Phalcon\Events\ManagerInterface) {
+        if ($eventsManager instanceof EventsManagerInterface) {
             $eventsManager->fire("search:beforeDelete", $this);
         }
 
@@ -103,7 +109,7 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
             ]
         );
 
-        if ($eventsManager instanceof \Phalcon\Events\ManagerInterface) {
+        if ($eventsManager instanceof EventsManagerInterface) {
             $eventsManager->fire("search:afterDelete", $this);
         }
 
@@ -113,16 +119,16 @@ class ElasticsearchIndexer extends \Phalcon\Di\Injectable implements \Phalcon\Ev
 
 
     /**
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param ModelInterface $model
      *
      * @throws Exception
      */
-    protected function getPrimaryKeyValue(\Phalcon\Mvc\ModelInterface $model)
+    protected function getPrimaryKeyValue(ModelInterface $model)
     {
         $primaryKeyAttributes = $this->modelsMetadata->getPrimaryKeyAttributes($model);
 
         if (count($primaryKeyAttributes) != 1) {
-            throw new \Sid\Phalcon\ElasticsearchIndexer\Exception("Model does not have a single Primary Key field.");
+            throw new Exception("Model does not have a single Primary Key field.");
         }
 
         return $model->readAttribute($primaryKeyAttributes[0]);

@@ -2,7 +2,10 @@
 
 namespace Sid\Phalcon\ElasticsearchIndexer;
 
-class Event extends \Phalcon\Mvc\User\Plugin
+use Phalcon\Mvc\ModelInterface;
+use Phalcon\Mvc\User\Plugin;
+
+class Event extends Plugin
 {
     protected $indexAllModels;
     
@@ -19,10 +22,10 @@ class Event extends \Phalcon\Mvc\User\Plugin
     
     
     /**
-     * @param \Phalcon\Events\Event       $event
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param \Phalcon\Events\Event $event
+     * @param ModelInterface        $model
      */
-    public function afterSave(\Phalcon\Events\Event $event, \Phalcon\Mvc\ModelInterface $model, $data)
+    public function afterSave(\Phalcon\Events\Event $event, ModelInterface $model, $data)
     {
         if ($this->canModelBeIndexed($model)) {
             $this->elasticsearchIndexer->index($model);
@@ -30,10 +33,10 @@ class Event extends \Phalcon\Mvc\User\Plugin
     }
 
     /**
-     * @param \Phalcon\Events\Event       $event
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param \Phalcon\Events\Event $event
+     * @param ModelInterface        $model
      */
-    public function beforeDelete(\Phalcon\Events\Event $event, \Phalcon\Mvc\ModelInterface $model, $data)
+    public function beforeDelete(\Phalcon\Events\Event $event, ModelInterface $model, $data)
     {
         if ($this->canModelBeIndexed($model)) {
             $this->elasticsearchIndexer->delete($model);
@@ -43,12 +46,12 @@ class Event extends \Phalcon\Mvc\User\Plugin
     
     
     /**
-     * @param \Phalcon\Mvc\ModelInterface $model
+     * @param ModelInterface $model
      *
      * @return boolean
      */
-    protected function canModelBeIndexed(\Phalcon\Mvc\ModelInterface $model)
+    protected function canModelBeIndexed(ModelInterface $model)
     {
-        return ($this->indexAllModels || ($model instanceof \Sid\Phalcon\ElasticsearchIndexer\IndexInterface));
+        return ($this->indexAllModels || ($model instanceof IndexInterface));
     }
 }
