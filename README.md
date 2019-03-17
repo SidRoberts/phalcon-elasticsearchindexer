@@ -46,14 +46,16 @@ $di->set(
 $di->set(
     "elasticsearch",
     function () {
-        $elasticsearch = new \Elasticsearch\Client(
+        $clientBuilder = \Elasticsearch\ClientBuilder::create();
+
+        $clientBuilder->setHosts(
             [
-                "hosts" => [
-                    //FIXME Change this accordingly.
-                    "127.0.0.1:9200",
-                ],
+                //FIXME Change this accordingly.
+                "127.0.0.1:9200",
             ]
         );
+
+        $elasticsearch = $clientBuilder->build();
 
         return $elasticsearch;
     },
