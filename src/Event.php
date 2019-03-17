@@ -7,24 +7,20 @@ use Phalcon\Mvc\User\Plugin;
 
 class Event extends Plugin
 {
+    /**
+     * @var bool
+     */
     protected $indexAllModels;
     
     
     
-    /**
-     * @param boolean $indexAllModels
-     */
-    public function __construct($indexAllModels = true)
+    public function __construct(bool $indexAllModels = true)
     {
         $this->indexAllModels = $indexAllModels;
     }
     
     
     
-    /**
-     * @param \Phalcon\Events\Event $event
-     * @param ModelInterface        $model
-     */
     public function afterSave(\Phalcon\Events\Event $event, ModelInterface $model, $data)
     {
         if ($this->canModelBeIndexed($model)) {
@@ -32,10 +28,6 @@ class Event extends Plugin
         }
     }
 
-    /**
-     * @param \Phalcon\Events\Event $event
-     * @param ModelInterface        $model
-     */
     public function beforeDelete(\Phalcon\Events\Event $event, ModelInterface $model, $data)
     {
         if ($this->canModelBeIndexed($model)) {
@@ -45,12 +37,7 @@ class Event extends Plugin
     
     
     
-    /**
-     * @param ModelInterface $model
-     *
-     * @return boolean
-     */
-    protected function canModelBeIndexed(ModelInterface $model)
+    protected function canModelBeIndexed(ModelInterface $model) : bool
     {
         return ($this->indexAllModels || ($model instanceof IndexInterface));
     }

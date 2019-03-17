@@ -23,11 +23,9 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
     /**
-     * @param string $index
-     *
      * @throws Exception
      */
-    public function __construct($index)
+    public function __construct(string $index)
     {
         $di = $this->getDI();
 
@@ -42,17 +40,11 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
 
-    /**
-     * @return EventsManagerInterface
-     */
-    public function getEventsManager()
+    public function getEventsManager() : EventsManagerInterface
     {
         return $this->eventsManager;
     }
 
-    /**
-     * @param EventsManagerInterface $eventsManager
-     */
     public function setEventsManager(EventsManagerInterface $eventsManager)
     {
         $this->eventsManager = $eventsManager;
@@ -61,8 +53,6 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
     /**
-     * @param ModelInterface $model
-     *
      * @throws Exception
      */
     public function index(ModelInterface $model)
@@ -92,8 +82,6 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
     /**
-     * @param ModelInterface $model
-     *
      * @throws Exception
      */
     public function delete(ModelInterface $model)
@@ -122,8 +110,6 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
     /**
-     * @param ModelInterface $model
-     *
      * @throws Exception
      */
     protected function getPrimaryKeyValue(ModelInterface $model)
