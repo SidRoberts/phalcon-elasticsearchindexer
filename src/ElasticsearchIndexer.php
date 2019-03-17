@@ -30,8 +30,11 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
     public function __construct($index)
     {
         $di = $this->getDI();
+
         if (!($di instanceof DiInterface)) {
-            throw new Exception("A dependency injection object is required to access internal services");
+            throw new Exception(
+                "A dependency injection object is required to access internal services"
+            );
         }
 
         $this->index = $index;
@@ -128,7 +131,9 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
         $primaryKeyAttributes = $this->modelsMetadata->getPrimaryKeyAttributes($model);
 
         if (count($primaryKeyAttributes) != 1) {
-            throw new Exception("Model does not have a single Primary Key field.");
+            throw new Exception(
+                "Model does not have a single Primary Key field."
+            );
         }
 
         return $model->readAttribute($primaryKeyAttributes[0]);
