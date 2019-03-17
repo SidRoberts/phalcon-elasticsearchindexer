@@ -46,14 +46,11 @@ $di->set(
 $di->set(
     "elasticsearch",
     function () {
-        //FIXME Change these accordingly.
-        $host = "127.0.0.1";
-        $port = "9200";
-        
         $elasticsearch = new \Elasticsearch\Client(
             [
                 "hosts" => [
-                    $host . ":" . $port
+                    //FIXME Change this accordingly.
+                    "127.0.0.1:9200",
                 ],
             ]
         );
