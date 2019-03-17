@@ -122,6 +122,8 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
             );
         }
 
-        return $model->readAttribute($primaryKeyAttributes[0]);
+        $primaryKeyAttribute = $primaryKeyAttributes[0];
+
+        return $model->readAttribute($primaryKeyAttribute);
     }
 }
