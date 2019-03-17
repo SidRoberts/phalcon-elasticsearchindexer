@@ -31,7 +31,10 @@ $di->set(
         // By default, this is true.
         $indexAllModels = true;
 
-        $eventsManager->attach("model", new \Sid\Phalcon\ElasticsearchIndexer\Event($indexAllModels));
+        $eventsManager->attach(
+            "model",
+            new \Sid\Phalcon\ElasticsearchIndexer\Event($indexAllModels)
+        );
 
         $modelsManager->setEventsManager($eventsManager);
 
