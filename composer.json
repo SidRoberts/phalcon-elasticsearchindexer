@@ -14,9 +14,9 @@
 	],
 	
 	"support": {
-		"source": "https://www.GitHub.com/SidRoberts/Phalcon-ElasticsearchIndexer",
-		"issues": "https://www.GitHub.com/SidRoberts/Phalcon-ElasticsearchIndexer/issues",
-		"wiki":   "https://www.GitHub.com/SidRoberts/Phalcon-ElasticsearchIndexer/wiki"
+		"source": "https://github.com/SidRoberts/phalcon-elasticsearchindexer",
+		"issues": "https://github.com/SidRoberts/phalcon-elasticsearchindexer/issues",
+		"wiki":   "https://github.com/SidRoberts/phalcon-elasticsearchindexer/wiki"
 	},
 	
 	
