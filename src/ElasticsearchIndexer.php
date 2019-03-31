@@ -68,7 +68,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
                 "index" => $this->index,
                 "type"  => $model->getSource(),
                 "id"    => $this->getPrimaryKeyValue($model),
-                "body"  => $model->toArray()
+                "body"  => $model->toArray(),
             ]
         );
 
@@ -96,7 +96,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
             [
                 "index" => $this->index,
                 "type"  => $model->getSource(),
-                "id"    => $this->getPrimaryKeyValue($model)
+                "id"    => $this->getPrimaryKeyValue($model),
             ]
         );
 
@@ -116,7 +116,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
     {
         $primaryKeyAttributes = $this->modelsMetadata->getPrimaryKeyAttributes($model);
 
-        if (count($primaryKeyAttributes) != 1) {
+        if (count($primaryKeyAttributes) !== 1) {
             throw new Exception(
                 "Model does not have a single Primary Key field."
             );
