@@ -1,5 +1,4 @@
-Sid\Phalcon\ElasticsearchIndexer
-================================
+# `Sid\Phalcon\ElasticsearchIndexer`
 
 Elasticsearch indexer component for Phalcon.
 
