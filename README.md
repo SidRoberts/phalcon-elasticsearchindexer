@@ -5,6 +5,7 @@ Elasticsearch indexer component for Phalcon.
 
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/SidRoberts/phalcon-elasticsearchindexer/tests.yml?style=for-the-badge)](https://github.com/SidRoberts/phalcon-elasticsearchindexer/actions)
+[![GitHub release](https://img.shields.io/github/release/SidRoberts/phalcon-elasticsearchindexer.svg?style=for-the-badge)]()
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/SidRoberts/phalcon-elasticsearchindexer.svg?style=for-the-badge)](https://github.com/SidRoberts/phalcon-elasticsearchindexer/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/SidRoberts/phalcon-elasticsearchindexer.svg?style=for-the-badge)](https://github.com/SidRoberts/phalcon-elasticsearchindexer/pulls)
