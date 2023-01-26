@@ -7,10 +7,7 @@ use Phalcon\Mvc\ModelInterface;
 
 class Event extends Injectable
 {
-    /**
-     * @var bool
-     */
-    protected $indexAllModels;
+    protected bool $indexAllModels;
 
 
 
@@ -21,14 +18,14 @@ class Event extends Injectable
 
 
 
-    public function afterSave(\Phalcon\Events\Event $event, ModelInterface $model, $data)
+    public function afterSave(\Phalcon\Events\Event $event, ModelInterface $model, $data): void
     {
         if ($this->canModelBeIndexed($model)) {
             $this->elasticsearchIndexer->index($model);
         }
     }
 
-    public function beforeDelete(\Phalcon\Events\Event $event, ModelInterface $model, $data)
+    public function beforeDelete(\Phalcon\Events\Event $event, ModelInterface $model, $data): void
     {
         if ($this->canModelBeIndexed($model)) {
             $this->elasticsearchIndexer->delete($model);
@@ -37,7 +34,7 @@ class Event extends Injectable
 
 
 
-    protected function canModelBeIndexed(ModelInterface $model) : bool
+    protected function canModelBeIndexed(ModelInterface $model): bool
     {
         return ($this->indexAllModels || ($model instanceof IndexInterface));
     }

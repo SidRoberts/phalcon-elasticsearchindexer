@@ -10,15 +10,9 @@ use Phalcon\Mvc\ModelInterface;
 
 class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 {
-    /**
-     * @var EventsManagerInterface
-     */
-    protected $eventsManager;
+    protected ?EventsManagerInterface $eventsManager;
 
-    /**
-     * @var string
-     */
-    protected $index;
+    protected string $index;
 
 
 
@@ -40,12 +34,12 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
 
 
 
-    public function getEventsManager() : EventsManagerInterface
+    public function getEventsManager(): ?EventsManagerInterface
     {
         return $this->eventsManager;
     }
 
-    public function setEventsManager(EventsManagerInterface $eventsManager)
+    public function setEventsManager(EventsManagerInterface $eventsManager): void
     {
         $this->eventsManager = $eventsManager;
     }
@@ -55,7 +49,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
     /**
      * @throws Exception
      */
-    public function index(ModelInterface $model)
+    public function index(ModelInterface $model): array
     {
         $eventsManager = $this->getEventsManager();
 
@@ -84,7 +78,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
     /**
      * @throws Exception
      */
-    public function delete(ModelInterface $model)
+    public function delete(ModelInterface $model): array
     {
         $eventsManager = $this->getEventsManager();
 
@@ -112,7 +106,7 @@ class ElasticsearchIndexer extends Injectable implements EventsAwareInterface
     /**
      * @throws Exception
      */
-    protected function getPrimaryKeyValue(ModelInterface $model)
+    protected function getPrimaryKeyValue(ModelInterface $model): mixed
     {
         $primaryKeyAttributes = $this->modelsMetadata->getPrimaryKeyAttributes($model);
 
