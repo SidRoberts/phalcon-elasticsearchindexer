@@ -2,8 +2,8 @@
 
 namespace Sid\Phalcon\ElasticsearchIndexer;
 
+use Phalcon\Di\DiInterface;
 use Phalcon\Di\Injectable;
-use Phalcon\DiInterface;
 use Phalcon\Events\EventsAwareInterface;
 use Phalcon\Events\ManagerInterface as EventsManagerInterface;
 use Phalcon\Mvc\ModelInterface;

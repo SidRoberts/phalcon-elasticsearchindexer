@@ -2,10 +2,10 @@
 
 namespace Sid\Phalcon\ElasticsearchIndexer;
 
+use Phalcon\Di\Injectable;
 use Phalcon\Mvc\ModelInterface;
-use Phalcon\Mvc\User\Plugin;
 
-class Event extends Plugin
+class Event extends Injectable
 {
     /**
      * @var bool

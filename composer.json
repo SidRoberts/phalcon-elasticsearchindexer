@@ -22,9 +22,9 @@
 
 
     "require": {
-        "php": "~7.1",
+        "php": "~8.0",
 
-        "ext-phalcon": "~3.0",
+        "ext-phalcon": "~5.0",
 
         "elasticsearch/elasticsearch": "~6.0"
     },
