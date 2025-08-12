@@ -27,7 +27,7 @@ Install using Composer:
 ```json
 {
     "require": {
-        "sidroberts/phalcon-elasticsearchindexer": "dev-master"
+        "sidroberts/phalcon-elasticsearchindexer": "dev-main"
     }
 }
 ```
